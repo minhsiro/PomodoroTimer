@@ -1,0 +1,127 @@
+body, html {
+  margin: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  overflow: hidden;
+}
+
+body {
+  --background-color: white;
+  --text-color: black;
+  --button-text-color: var(--background-color);
+  --accent-color: orangered;
+}
+
+body.dark {
+  --background-color: #333;
+  --text-color: white;
+  --button-text-color: var(--background-color);
+  --accent-color: #D0D066;
+}
+
+.main {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  background: var(--background-color);
+}
+
+.session-title {
+  margin: 0;
+  margin-top: 5vh;
+  font-size: 5em;
+  font-weight: bold;
+  background-image: -webkit-linear-gradient(92deg, #ee189c, #feab3a);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.circular-timer {
+  margin: 0;
+  margin-top: 7vh;
+}
+
+.progress-bar {
+  margin: 0;
+  margin-top: 7vh;
+}
+
+.function-container {
+  margin: 0;
+  margin-top: 2vh;
+}
+
+.feature-buttons {
+  position: absolute;
+  bottom: 20%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.feature-buttons button {
+  font-size: 1.1em;
+  height: 80px;
+  width: 80px;
+  border-radius: 100%;
+  margin: 0 1em 0 1em;
+  border: none;
+  outline: none;
+  background-color: var(--accent-color);
+}
+
+.list-item {
+  position: absolute;
+  bottom: 0;
+  border: 1px solid black;
+  width: 100vw;
+  height: 20vh;
+}
+
+.list-item .add-btn {
+  float: right;
+  margin: 0.5em;
+  position: relative;
+  top: -5em;
+  height: 4em;
+  width: 4em;
+  border-radius: 100%;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background-color: var(--accent-color);
+}
+
+@media all and (max-width: 768px) {
+  .session-title {
+    font-size: 3em;
+  }
+}
+
+@media all and (min-width: 768px) {
+  .feature-buttons button {
+    cursor: pointer;
+    background-color: var(--accent-color);
+    -webkit-transition: -webkit-transform 0.5s;
+    transition: -webkit-transform 0.5s;
+    transition: transform 0.5s;
+    transition: transform 0.5s, -webkit-transform 0.5s;
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  .feature-buttons button:hover {
+    -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+  }
+}
+/*# sourceMappingURL=Main.css.map */

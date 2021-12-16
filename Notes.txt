@@ -1,0 +1,33 @@
+- icons
+https://materialdesignicons.com/
+
+
+store array and object in local storage
+https://stackoverflow.com/questions/3357553/how-do-i-store-an-array-in-localstorage
+https://stackoverflow.com/questions/6193574/save-javascript-objects-in-sessionstorage
+https://www.w3schools.com/js/js_json_stringify.asp
+
+
+local storage
+https://www.w3schools.com/html/html5_webstorage.asp
+*** methods
+https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
+
+
+collapsed sidepanel for report-bug and how-to-use compononent
+https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_collapse_sidepanel
+https://www.w3schools.com/howto/howto_js_collapse_sidepanel.asp
+
+Horizontal Scrollable Menu for item list component
+https://www.w3schools.com/howto/howto_css_menu_horizontal_scroll.asp
+
+dark theme
+https://www.youtube.com/watch?v=RiWxhm5ZdFM
+
+progress bar
+https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_progressbar_3
+
+
+- variables in sass will not convert to variables in css
+you have to declare css variables in sass
+https://stackoverflow.com/questions/50202991/unable-to-set-scss-variable-to-css-variable

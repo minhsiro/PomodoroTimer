@@ -1,0 +1,76 @@
+main screen
+- session title on top
+- a circle timer (color == background session color);
+- a loading bar
+- a session counter
+- a pause/resume button
+- bottom: pomodoro list (has add button)
+
+- change theme toggle at corner
+- a how to use button (has an exit button)
+- a report bug (has an exit button)
+
+
+
+(there is 1 default pomodoro when load)
+pomodoro list at bottom: Horizontal Scrollable Menu
+- items (show title & session time/break), stored in local browser storage, max = 10
+    pomodoro time, min 25, max 90
+    break time, min 5, max 30
+    title ,max 20 characters
+    background, 3 color
+    daily goal: 1-10
+    music after each session and each break
+
+
+- when user clicks on another session and main session clock is run, alert.
+- if main session clock is not running, changes main session. (reset count???).
+- if click change theme, change both theme, main & list.
+- if click report bug or how it works, pause main clock if running.
+- if click add while main clock is running, pause.
+- if click delete, delete items from local storage., confirm with alert
+- when click is running, only show pause/resume. if clock stop, show reset.
+- if click reset, set timer to 0:0.
+- if count == daily count, alert congratulations, set count back to 0.
+- after a session, change to break. break has start break & skip break button.
+- if items == 10, alert and disable add button(change color).
+- if session is on main screen, disable delete button.
+- all buttons have hover state.
+
+STATE DESIGN
+state is localStorage
+
+item state
+- isOnMainScreen
+- isSessionRunning
+- isBreakRunning.
+- title
+- pomodoro time:{hour:0, minute: 0}
+- break time
+- background color
+- daily goal
+- session count
+- music
+
+
+Component
+report bug component        Collapsed Sidepanel
+how to use component        Collapsed Sidepanel
+main screen component (dark theme button, how to use button, report bug button)
+item list component
+
+useReducer to handle actions
+action add: items   (vanila javascript,DOM)
+action delete: items  (vanila javascript,DOM)
+action play, pause, resume, reset, skip
+
+toggle change theme                                 50% done
+open/close report bug
+open/close how to use
+
+desponsive design mobile                            50% done
+- disable hover
+
+
+- delete 1 item at an given position in array
+=> filter

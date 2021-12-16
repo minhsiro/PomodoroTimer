@@ -1,0 +1,124 @@
+body, html {
+    margin: 0;
+    box-sizing: border-box;
+    overflow: hidden; // deal with scroll bar
+
+}
+
+
+body{
+    --background-color: white;
+    --text-color: black;
+    --button-text-color: var(--background-color);
+    --accent-color: orangered;
+}
+
+body.dark{
+    --background-color: #333;
+    --text-color: white;
+    --button-text-color: var(--background-color);
+    --accent-color: #D0D066;
+}
+
+.main{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    background: var(--background-color);
+}
+
+
+
+.session-title {
+    margin: 0;
+    margin-top: 5vh;
+    font-size: 5em;
+    font-weight: bold;
+    background-image: -webkit-linear-gradient(92deg, #ee189c, #feab3a);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.circular-timer {
+    margin:0;
+    margin-top: 7vh;
+}
+
+.progress-bar {
+    margin:0;
+    margin-top: 7vh;
+}
+
+.function-container {
+    margin:0;
+    margin-top: 2vh;
+}
+
+.feature-buttons {
+    position:absolute;
+    bottom: 20%;
+    display:flex;
+
+    button {
+        font-size: 1.1em;
+        height: 80px;
+        width: 80px;
+        border-radius: 100%;
+        margin: 0 1em 0 1em;
+        border: none;
+        outline: none;
+        background-color: var(--accent-color);
+
+    }
+}
+
+.list-item {
+    position: absolute;
+    bottom: 0;
+    border: 1px solid black;
+    width: 100vw;
+    height: 20vh;
+
+    .add-btn {
+        float: right;
+        margin:0.5em;
+        position: relative;
+        top: -5em;
+        height: 4em;
+        width:4em;
+        border-radius: 100%;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        background-color: var(--accent-color);
+    }
+}
+
+
+// PHONE
+@media all and (max-width: 768px) {
+    .session-title {
+        font-size: 3em;
+    }
+}
+
+
+// PC
+@media all and (min-width:768px) {
+    .feature-buttons {
+        button {
+            // same code &&
+            cursor: pointer;
+            background-color: var(--accent-color);
+            transition: transform 0.5s;
+            transform: scale(1);
+            &:hover{
+                //opacity: 0.7;
+                transform: scale(1.1);
+            }
+        }
+    }
+}
