@@ -36,6 +36,7 @@ pomodoro list at bottom: Horizontal Scrollable Menu
 - if items == 10, alert and disable add button(change color).
 - if session is on main screen, disable delete button.
 - all buttons have hover state.
+- if items == 1, disable delete, must have at least 1
 
 STATE DESIGN
 state is localStorage
@@ -54,9 +55,8 @@ item state
 
 
 Component
-report bug component        Collapsed Sidepanel
 how to use component        Collapsed Sidepanel
-main screen component (dark theme button, how to use button, report bug button)
+main screen component (dark theme button, how to use button)
 item list component
 
 useReducer to handle actions
@@ -64,13 +64,12 @@ action add: items   (vanila javascript,DOM)
 action delete: items  (vanila javascript,DOM)
 action play, pause, resume, reset, skip
 
-toggle change theme                                 50% done
-open/close report bug
+toggle change theme                                                                      done
 open/close how to use
 
-desponsive design mobile                            50% done
+desponsive design mobile                                                                 done
 - disable hover
-
+- smaller text
 
 - delete 1 item at an given position in array
 => filter
