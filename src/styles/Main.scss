@@ -1,12 +1,14 @@
-body, html {
+* {
     margin: 0;
+    padding: 0;
     box-sizing: border-box;
     overflow: hidden; // deal with scroll bar
 
 }
 
 
-body{
+
+[data-theme="light"]{
     --background-color: white;
     --text-color: black;
     --button-text-color: var(--background-color);
@@ -14,8 +16,7 @@ body{
     --form-background: #333;
     --form-text-color: white;
 }
-
-body.dark{
+[data-theme="dark"]{
     --background-color: #333;
     --text-color: white;
     --button-text-color: var(--background-color);
@@ -31,22 +32,7 @@ body.dark{
     height: 100vh;
     width: 100vw;
     background: var(--background-color);
-
-    .add-btn {
-        float: right;
-        margin:0.5em;
-        position: absolute;
-        height: 4em;
-        width:4em;
-        border-radius: 100%;
-        bottom:20%;
-        right: 0;
-        border: none;
-        outline: none;
-        cursor: pointer;
-        background-color: var(--accent-color);
-        color: var(--button-text-color);
-    }
+    transition: 1s; // smooth color transition
 }
 
 
@@ -128,6 +114,14 @@ body.dark{
     }
 }
 
+.display{
+    display: block;
+}
+
+.hidden {
+    display: hidden;
+}
+
 
 
 .session-title {
@@ -141,54 +135,116 @@ body.dark{
     -webkit-text-fill-color: transparent;
 }
 
-.circular-timer {
-    margin:0;
-    margin-top: 7vh;
-}
+
 
 .progress-bar {
     margin:0;
     margin-top: 7vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+
+    .clock {
+        color:var(--text-color);
+        margin-bottom: 3em;
+        font-size: 10em;
+        border: 1px solid blue;
+        padding:0;
+        margin-bottom: 0.5em;
+    }
+
+    .goal-count{
+        position: absolute;
+        color:var(--text-color);
+        bottom: 35%;
+        right: 3%;
+        font-size: 1.5em;
+    }
+    #my-progress {
+        position: relative;
+        width: 30vw;
+        background-color: #FFE0BD;
+        height: 1.5em;
+        border-radius: 0.75em;
+        margin-bottom: 1em;
+        #bar {
+            display: flex;
+            align-items: center;
+            position: absolute;
+            height: 1.5em;
+            width: 1%;
+            min-width: 1rem;
+            max-width: 100%;
+            background-color: #00ccff;
+            border-radius: 0.75em;
+        }
+    }
+
 }
 
-.play-btn {
+.play-stop-buttons {
     margin:0;
     margin-top: 2vh;
-
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    button {
+        margin: 1em;
+        height: 4em;
+        width: 4em;
+        padding:0;
+        border-radius: 50%;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        background-color: var(--accent-color);
+        transition: transform 0.5s; // never use zoom
+        span {
+            font-size: 1.5em;
+        }
+        &:hover{
+            transform: scale(1.1);
+        }
+    }
 }
 
 .feature-buttons {
-    position:absolute;
-    left: 0%;
-    display:flex;
-    flex-direction: column;
-
     button {
         border-radius: 100%;
         border: none;
         outline: none;
         background-color: var(--accent-color);
         color: var(--button-text-color);
+        span {
+            font-size: 1.9em;
+        }
     }
+
 }
 
-.list-item {
-    position: absolute;
-    bottom: 0;
-    border: 1px solid black;
-    width: 100vw;
-    height: 20vh;
-    color: var(--text-color);
-}
+
+
 
 
 // PHONE
 @media all and (max-width: 768px) {
+    .form-div {
+        width: 80%;
+    }
+
+
     .session-title {
         font-size: 3em;
     }
 
     .feature-buttons {
+        position:absolute;
+        bottom: 5%;
+        display:flex;
+        flex-direction: row;
+
         button {
             font-size: 0.9em;
             height: 60px;
@@ -202,6 +258,11 @@ body.dark{
 // PC
 @media all and (min-width:768px) {
     .feature-buttons {
+        position:absolute;
+        left: 0%;
+        display:flex;
+        flex-direction: column;
+
         button {
             font-size: 1.1em;
             height: 80px;
@@ -210,7 +271,7 @@ body.dark{
 
             cursor: pointer;
             background-color: var(--accent-color);
-            transition:  transform 0.5s;
+            transition: 1s; // tranform 1s
             transform: scale(1);
             &:hover{
                 transform: scale(1.1);

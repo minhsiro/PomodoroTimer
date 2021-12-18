@@ -1,154 +1,159 @@
 import "./styles/Main.css";
-import List from "./components/List.js";
 import Features from "./components/features.js";
+import ProgressBar from "./components/ProgressBar.js";
+import { reducer, initialState } from "./components/State.js";
+
 import * as React from "react";
 
 
 export default function Main() {
-  const [distance,setDistance] = React.useState(30);
-  const [state,setState] = React.useState(false);
-    React.useEffect(()=>{
-      console.log("ok1");
-      let x;
-      if(state === true){
-        x = setInterval(()=>{
-        setDistance((distance) => distance+1);
-
-        },1000);
-        if(distance  === 35){
-          setState((state) => !state);
-          console.log(state);
-        }
-      }
-
-
-      return () => clearInterval(x);
-    },[state,distance]);
-
-  const toggle = () => {
-    setState((state) => !state);
-  }
-
+  const [state,dispatch] = React.useReducer(reducer,initialState);
+  const [isFormShow,setForm] = React.useState(false);
 
 
   const ShowForm = () => {
-    document.getElementsByClassName("form-div")[0].style.display = "block";
+    if (state.ClockInfo.isSessionActive || state.ClockInfo.isBreakActive) {
+      alert("cant change while clock is running");
+    } else {
+      setForm((isFormShow) => !isFormShow);
+    }
   }
 
   const hideForm = () => {
-    document.getElementsByClassName("form-div")[0].style.display = "none";
+    setForm((isFormShow) => !isFormShow);
+  }
+
+
+  const handle = {
+    handleTitleChange: function(event) {
+      dispatch({type:"TITLE",value:event.target.value});
+      console.log("title changed");
+    },
+    handleSessionIncre: function() {
+      dispatch({type:"SESSION_INCRE"});
+    },
+    handleSessionDecre: function() {
+      dispatch({type:"SESSION_DECRE"});
+    },
+    handleBreakIncre: function() {
+      dispatch({type:"BREAK_INCRE"});
+    },
+    handleBreakDecre: function() {
+      dispatch({type:"BREAK_DECRE"});
+    },
+    handleGoalIncre: function() {
+      dispatch({type:"GOAL_INCRE"});
+    },
+    handleGoalDecre: function() {
+      dispatch({type:"GOAL_DECRE"});
+    },
+    handleSetTime: function() {
+      console.log("changed");
+      hideForm();
+      if (state.isSessionActive) {
+        console.log("cant do it right now");
+      } else {
+        dispatch({type:"SET_TIME"});
+      }
+    },
+    handleSubmit: function(event) {
+      event.preventDefault();
+      console.log("prevented");
+    }
+  }
+
+  const handlePlay = () => {
+      dispatch({type:"PLAY"});
+
+  }
+  const handleCount = () => {
+    dispatch({type:"COUNT"});
   }
 
   return (
     <div className="main">
-      <div className="session-title">TITLE</div>
-      <div className="circular-timer">CIRCULAR</div>
-      <div className="progress-bar">
-        <div id="demo">{distance}</div>
-        <div>PROGRESS BAR</div>
-      </div>
-      <div className="play-btn">BUTTONS: play, pause-resume, reset, skip
-        <button onClick={() => toggle()}>play</button>
-      </div>
-
-      <button className="add-btn" onClick={() => ShowForm()}>Add</button>
-      <AddNewClockForm hideForm={hideForm}/>
-      <Features/>
-      <List/>
+      <div className="session-title">{state.ClockInfo.title}</div>
+      <ProgressBar state={state.ClockInfo} handlePlay={handlePlay} handleCount={handleCount}/>
+      <AddNewPomo hideForm={hideForm} isFormShow={isFormShow} ClockInfo={state.ClockInfo}
+      handle={handle}/>
+      <Features showForm={ShowForm}/>
     </div>
   )
 }
 
-function AddNewClockForm(props) {
-  const [title,setTitle] = React.useState("Pomodoro");
-  const [session,setSession] = React.useState(25);
-  const [Break,setBreak] = React.useState(5);
-  const [goal,setGoal] = React.useState(4);
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log("prevented");
-  }
-
-  const addSessionTime = () => {
-    if(session < 90){
-      setTimeout(setSession(session+5),200);
-    }
-  }
-  const subtractSessionTime = () => {
-    if(session > 25){
-      setTimeout(setSession(session-5),200);
-    }
-  }
-
-  const addBreakTime = () => {
-    if(Break < 30){
-      setBreak(Break+5);
-    }
-  }
-  const subtractBreakTime = () => {
-    if(Break > 5){
-      setBreak(Break-5);
-    }
-  }
-
-  const addGoal = () => {
-    if(goal < 10){
-      setGoal(goal+1);
-    }
-  }
-  const subtractGoal = () => {
-    if(goal > 1){
-      setGoal(goal-1);
-    }
-  }
-
+function AddNewPomo(props) {
 
   return (
-    <div className="form-div">
+    <div className={`form-div ${props.isFormShow ? 'display' : 'hidden'}`}>
     <button className="close-form" onClick={() => props.hideForm()}>X</button>
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={props.handle.handleSubmit}>
 
       <div className="set-title">
       <label> Session Title:</label>
       <input type="text" className="" pattern="[a-zA-Z0-9]{6,20}" defaultValue={"Pomodoro"} required
-          size={15} maxLength={20} onChange={(e) => setTitle(e.target.value)}/>
+          size={15} maxLength={20} onChange={(event) => props.handle.handleTitleChange(event)}/>
       <br/>
       </div>
       <div className="set-time-break-goal">
       <div className="time">
       <p>Session</p>
       <div>
-          <button onClick={addSessionTime}>▲</button>
-          {session}
-          <button onClick={subtractSessionTime}>▼</button>
+          <button type="button" id="add-sesstion-length"
+            onClick={() => props.handle.handleSessionIncre()}>▲</button>
+          {props.ClockInfo.session}
+          <button type="button" id="reduce-sesstion-length"
+            onClick={() =>props.handle.handleSessionDecre() }>▼</button>
         </div>
       </div>
 
       <div className="break">
       <p>Break</p>
       <div>
-          <button onClick={addBreakTime}>▲</button>
-          {Break < 10 ? "0" + Break : Break}
-          <button onClick={subtractBreakTime}>▼</button>
+          <button type="button" onClick={() => props.handle.handleBreakIncre()}>▲</button>
+          {props.ClockInfo.break < 10 ? "0" + props.ClockInfo.break : props.ClockInfo.break}
+          <button type="button" onClick={() => props.handle.handleBreakDecre()}>▼</button>
         </div>
       </div>
 
       <div className="goal">
       <p>Goal</p>
       <div>
-          <button onClick={addGoal}>▲</button>
-          {goal < 10 ? "0" + goal : goal}
-          <button onClick={subtractGoal}>▼</button>
+          <button type="button" onClick={() => props.handle.handleGoalIncre()}>▲</button>
+          {props.ClockInfo.goal < 10 ? "0" + props.ClockInfo.goal : props.ClockInfo.goal}
+          <button type="button" onClick={() => props.handle.handleGoalDecre()}>▼</button>
         </div>
       </div>
       </div>
-      <input type="submit" className="submit-btn" pattern=""/>
+      <button type="button" className="submit-btn" onClick={() => props.handle.handleSetTime()}>submit</button>
     </form>
   </div>
   )
 }
 
+
+
+
+// timer logic
+// const [distance,setDistance] = React.useState(30);
+// const [state,setState] = React.useState(false);
+//   React.useEffect(()=>{
+//     console.log("ok1");
+//     let x;
+//     if(state === true){
+//       x = setInterval(()=>{
+//       setDistance((distance) => distance+1);
+
+//       },1000);
+//       if(distance  === 35){
+//         setState((state) => !state);
+//         console.log(state);
+//       }
+//     }
+//     return () => clearInterval(x);
+//   },[state,distance]);
+
+// const toggle = () => {
+//   setState((state) => !state);
 
 
 // if(typeof(Storage) !== undefined) {

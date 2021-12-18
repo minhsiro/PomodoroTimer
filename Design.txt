@@ -8,7 +8,6 @@ main screen
 
 - change theme toggle at corner
 - a how to use button (has an exit button)
-- a report bug (has an exit button)
 
 
 
@@ -57,11 +56,8 @@ item state
 Component
 how to use component        Collapsed Sidepanel
 main screen component (dark theme button, how to use button)
-item list component
 
 useReducer to handle actions
-action add: items   (vanila javascript,DOM)
-action delete: items  (vanila javascript,DOM)
 action play, pause, resume, reset, skip
 
 toggle change theme                                                                      done
