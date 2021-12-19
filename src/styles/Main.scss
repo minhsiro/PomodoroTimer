@@ -46,6 +46,7 @@
     font-size:1.7em;
     padding: 1em;
     border-radius: 0.5em;
+    animation: anim 1s;
     form {
         display:flex;
         justify-content: center;
@@ -114,6 +115,24 @@
         }
     }
 }
+
+
+  @keyframes anim {
+    from {
+        top: 100%;
+        width: 30%;
+        opacity: 0;
+    }
+    to {
+        top:30%;
+        width: 30%;
+        opacity: 1;
+    }
+  }
+
+
+
+
 
 .display{
     display: block;
@@ -297,6 +316,15 @@
 }
 
 
+.slides {
+    display: block;
+    #tomato {
+        width: 30%;
+        height: auto;
+    }
+}
+
+
 // PHONE
 @media all and (max-width: 768px) {
     .form-div {
@@ -315,6 +343,45 @@
                     float:right;
                     border: 1px solid black;
                 }
+            }
+        }
+    }
+
+    .progress-bar {
+        .clock {
+            color:var(--text-color);
+            font-size: 8em;
+            padding:0;
+            margin-bottom: 0.5em;
+        }
+
+        .goal-count{
+            bottom: 40%;
+            right: 7%;
+            font-size: 1.2em;
+        }
+
+        .session-break{
+
+            bottom: 40%;
+            left: 7%;
+            font-size: 1.2em;
+        }
+        #my-progress {
+            position: relative;
+            width: 75vw;
+            height: 1em;
+            border-radius: 0.5em;
+            margin-bottom: 1em;
+            #bar {
+                display: flex;
+                align-items: center;
+                position: absolute;
+                height: 1em;
+                width: 1%;
+                min-width: 1rem;
+                max-width: 100%;
+                border-radius: 0.5em;
             }
         }
     }
