@@ -70,10 +70,20 @@ export default function Main() {
     dispatch({type:"COUNT"});
   }
 
+  const handleReset = () => {
+    dispatch({type:"RESET"});
+  }
+
+  const handleSkip = () => {
+    dispatch({type:"SKIP"});
+  }
+
   return (
     <div className="main">
       <div className="session-title">{state.ClockInfo.title}</div>
-      <ProgressBar state={state.ClockInfo} handlePlay={handlePlay} handleCount={handleCount}/>
+      <ProgressBar state={state.ClockInfo} handlePlay={handlePlay} handleCount={handleCount}
+        handleReset={handleReset} handleSkip={handleSkip}
+      />
       <AddNewPomo hideForm={hideForm} isFormShow={isFormShow} ClockInfo={state.ClockInfo}
       handle={handle}/>
       <Features showForm={ShowForm}/>
@@ -100,7 +110,7 @@ function AddNewPomo(props) {
       <div>
           <button type="button" id="add-sesstion-length"
             onClick={() => props.handle.handleSessionIncre()}>▲</button>
-          {props.ClockInfo.session}
+          {props.ClockInfo.session < 10 ? "0" + props.ClockInfo.session : props.ClockInfo.session}
           <button type="button" id="reduce-sesstion-length"
             onClick={() =>props.handle.handleSessionDecre() }>▼</button>
         </div>

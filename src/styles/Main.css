@@ -101,6 +101,10 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
 }
 
 .form-div form .set-time-break-goal button {
@@ -214,6 +218,14 @@
   font-size: 1.5em;
 }
 
+.progress-bar .session-break {
+  position: absolute;
+  color: var(--text-color);
+  bottom: 35%;
+  left: 3%;
+  font-size: 1.5em;
+}
+
 .progress-bar #my-progress {
   position: relative;
   width: 30vw;
@@ -278,6 +290,92 @@
           transform: scale(1.1);
 }
 
+.on-mouse-down {
+  background-color: #B50B66 !important;
+}
+
+.on-mouse-up {
+  background-color: var(--accent-color);
+}
+
+.snackbar-hidden {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: var(--text-color);
+  color: var(--background-color);
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  font-size: 17px;
+}
+
+.snackbar-show {
+  visibility: visible;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: var(--text-color);
+  color: var(--background-color);
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  font-size: 17px;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+
+@keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}
+
 .feature-buttons button {
   border-radius: 100%;
   border: none;
@@ -293,6 +391,32 @@
 @media all and (max-width: 768px) {
   .form-div {
     width: 80%;
+  }
+  .form-div form .set-time-break-goal {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  .form-div form .set-time-break-goal .time, .form-div form .set-time-break-goal .break, .form-div form .set-time-break-goal .goal {
+    margin: 0.5em;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    width: 100%;
+    border: 1px solid black;
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
+  }
+  .form-div form .set-time-break-goal .time div, .form-div form .set-time-break-goal .break div, .form-div form .set-time-break-goal .goal div {
+    margin-left: 2em;
+    float: right;
+    border: 1px solid black;
   }
   .session-title {
     font-size: 3em;

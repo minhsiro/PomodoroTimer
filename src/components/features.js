@@ -10,10 +10,17 @@ export default function Features(props) {
 
   return (
     <div className="feature-buttons">
-      <button className="moon-sun" onClick={() => switchTheme()}>
+      <button
+        title="Change Theme"
+        className="moon-sun"
+        onClick={() => switchTheme()}>
         {isDark ? <span>&#9790;</span> : <span>&#9788;</span>}</button>
-      <button>How to use</button>
-      <button onClick={() => props.showForm()}>Set Time</button>
+      <button
+        title="How to use"
+        >How to use</button>
+      <button
+        title="Set new Pomodoro"
+        onClick={() => props.showForm()}>Set Time</button>
 
     </div>
   )
