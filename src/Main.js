@@ -6,14 +6,13 @@ import AddNewPomo from "./components/AddNewPomo.js";
 import Slides from "./components/Slides.js";
 import * as React from "react";
 
-
 export default function Main() {
   const [state,dispatch] = React.useReducer(reducer,initialState);
   const [isFormShow,setForm] = React.useState(false);
-
+  const [isInstructionShow, setInstruction] = React.useState(false);
 
   const ShowForm = () => {
-    if (state.ClockInfo.isSessionActive || state.ClockInfo.isBreakActive) {
+    if (state.ClockInfo.isSessionActive || state.ClockInfo.isBreakActive || isInstructionShow) {
       alert("cant change while clock is running");
     } else {
       setForm((isFormShow) => !isFormShow);
@@ -24,6 +23,14 @@ export default function Main() {
     setForm((isFormShow) => !isFormShow);
   }
 
+  const toggleInstruction = () => {
+    if(isFormShow) {
+
+    } else {
+      setInstruction((isInstructionShow) => !isInstructionShow);
+      console.log(isInstructionShow);
+    }
+  }
 
   const handle = {
     handleTitleChange: function(event) {
@@ -82,20 +89,30 @@ export default function Main() {
   return (
     <div className="main">
       <div className="session-title">{state.ClockInfo.title}</div>
-      <ProgressBar state={state.ClockInfo} handlePlay={handlePlay} handleCount={handleCount}
-        handleReset={handleReset} handleSkip={handleSkip}
-      />
-      <AddNewPomo hideForm={hideForm} isFormShow={isFormShow} ClockInfo={state.ClockInfo}
-      handle={handle}/>
-      <Features showForm={ShowForm}/>
-      <Slides/>
+      <ProgressBar
+        state={state.ClockInfo}
+        handlePlay={handlePlay}
+        handleCount={handleCount}
+        handleReset={handleReset}
+        handleSkip={handleSkip}
+        />
+      <AddNewPomo
+        hideForm={hideForm}
+        isFormShow={isFormShow}
+        ClockInfo={state.ClockInfo}
+        handle={handle}
+        />
+      <Features
+        showForm={ShowForm}
+        toggleInstruction={toggleInstruction}
+        />
+      <Slides
+        isInstructionShow={isInstructionShow}
+        toggleInstruction={toggleInstruction}
+        />
     </div>
   )
 }
-
-
-
-
 
 // timer logic
 // const [distance,setDistance] = React.useState(30);

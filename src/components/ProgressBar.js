@@ -9,19 +9,16 @@ export default function ProgressBar(props) {
     console.log(isMouseDown);
   }
 
-
   React.useEffect(() => {
     let x;
     if (props.state.isSessionActive || props.state.isBreakActive){
       x = setInterval(() => {
         props.handleCount();
-
       },1000);
     }
 
     return () => clearInterval(x);
   },[props.state.isSessionActive, props.state.isBreakActive]);
-
 
   return (
     <div className="progress-bar">
@@ -36,8 +33,6 @@ export default function ProgressBar(props) {
       <div id="my-progress">
         <div id="bar" style={{width:`${(props.state.progressCount/((props.state.isSessionActive ?props.state.session : props.state.break)*60) * 100)}%`}}></div>
       </div>
-
-
       <div className="play-stop-buttons">
       <button
         title="Play/Stop"

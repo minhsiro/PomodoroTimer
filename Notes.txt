@@ -47,3 +47,8 @@ https://css-tricks.com/easy-dark-mode-and-multiple-color-themes-in-react/
 
 react hooks API
 https://usehooks.com/page/2
+
+
+drag and scroll
+https://www.youtube.com/watch?v=C9EWifQ5xqA&t=390s
+https://codepen.io/toddwebdev/pen/yExKoj

@@ -4,11 +4,9 @@ main screen
 - a loading bar
 - a session counter
 - a pause/resume button
-- bottom: pomodoro list (has add button)
 
 - change theme toggle at corner
 - a how to use button (has an exit button)
-
 
 
 (there is 1 default pomodoro when load)
@@ -25,17 +23,14 @@ pomodoro list at bottom: Horizontal Scrollable Menu
 - when user clicks on another session and main session clock is run, alert.
 - if main session clock is not running, changes main session. (reset count???).
 - if click change theme, change both theme, main & list.
-- if click report bug or how it works, pause main clock if running.
 - if click add while main clock is running, pause.
 - if click delete, delete items from local storage., confirm with alert
 - when click is running, only show pause/resume. if clock stop, show reset.
 - if click reset, set timer to 0:0.
 - if count == daily count, alert congratulations, set count back to 0.
 - after a session, change to break. break has start break & skip break button.
-- if items == 10, alert and disable add button(change color).
 - if session is on main screen, disable delete button.
 - all buttons have hover state.
-- if items == 1, disable delete, must have at least 1
 
 STATE DESIGN
 state is localStorage
@@ -47,10 +42,10 @@ item state
 - title
 - pomodoro time:{hour:0, minute: 0}
 - break time
-- background color
 - daily goal
 - session count
 - music
+- displayminute, displaysecond, displayprogesscount
 
 
 Component
@@ -69,3 +64,26 @@ desponsive design mobile                                                        
 
 - delete 1 item at an given position in array
 => filter
+
+
+APP LOGIC:
+- when play/stop button is click, check if it is session time or break time by
+comparing session count and break count.
+- count function: set counter = session time in seconds
+after each iteration, decrease 1, and set displayMinute and displaySecond
+according to counter.
+- if counter reach 0, switch UI to break. the same goes for break.
+- if goal count === goal => reset everything.
+- only allow reset if clock is not running and only allow skip if it is break.
+
+progress bar logic
+set progress count = 1
+progress bar  = (1 / 25 * 60) * 100% (if session , 5 if break) => percentage
+
+the way logic go
+play stop is clicked
+useEffect runs, => call props.handleCount => set counter => set minute,set second
+=> render,
+after 1 sesond,
+=> call props.handleCount => set counter => set minute,set second => render
+if clicked again, => stop entering interval

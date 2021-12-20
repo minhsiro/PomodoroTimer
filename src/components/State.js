@@ -1,21 +1,18 @@
-
-
 export const initialState = {
   ClockInfo: {
     title: "Pomodoro",
-    session: 1,
-    break: 1,
-    goal: 2,
+    session: 25,
+    break: 5,
+    goal: 4,
     countSession: 0,
     countBreak:0,
     isSessionActive: false,
     isBreakActive: false,
-    displayMinute: 1,
-    displaySecond: 0,
-    counter: 0,
-    progressCount: 1
+    displayMinute: 25, // handle logic
+    displaySecond: 0, //handle logic
+    counter: 0, // handle logic
+    progressCount: 1 // handle progress bar
   },
-
 }
 
 export const reducer = (state, action) => {
@@ -23,6 +20,9 @@ export const reducer = (state, action) => {
     case "TITLE": {
       const newState = JSON.parse(JSON.stringify(state));
       newState.ClockInfo.title = action.value;
+      if (newState.ClockInfo.title === "") {
+        newState.ClockInfo.title = ".";
+      }
       return newState;
     }
     case "SESSION_INCRE": {
