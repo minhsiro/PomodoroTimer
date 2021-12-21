@@ -274,8 +274,6 @@
           align-items: center;
   position: absolute;
   height: 1.5em;
-  width: 1%;
-  min-width: 1rem;
   max-width: 100%;
   background-color: #00ccff;
   border-radius: 0.75em;
@@ -607,8 +605,6 @@
             align-items: center;
     position: absolute;
     height: 1em;
-    width: 1%;
-    min-width: 1rem;
     max-width: 100%;
     border-radius: 0.5em;
   }

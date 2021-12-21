@@ -3,6 +3,21 @@ export default function ProgressBar(props) {
   // => 25 minutes in seconds
   const [isMouseDown,setMouse] = React.useState(false);
   const [isSkip,setSkip] = React.useState(false);
+  const ProgressBar = React.useRef();
+  const max_width = React.useRef();
+
+  if (props.state.isSessionActive) {
+    max_width.current = props.state.session;
+  } else if (props.state.isBreakActive) {
+    max_width.current = props.state.break;
+  } else if (!props.state.isBreakActive && !props.state.isSessionActive) {
+    if(props.state.countSession === props.state.countBreak) {
+      max_width.current = props.state.session;
+    } else if (props.state.countSession > props.state.countBreak) {
+      max_width.current = props.state.break;
+    }
+  }
+  ProgressBar.current = (props.state.progressCount/((max_width.current)*60) * 100);
 
   const handleMouse = () => {
     setMouse((isMouseDown) => !isMouseDown);
@@ -31,7 +46,7 @@ export default function ProgressBar(props) {
       <div className="goal-count">{props.state.countSession} of {props.state.goal}</div>
 
       <div id="my-progress">
-        <div id="bar" style={{width:`${(props.state.progressCount/((props.state.isSessionActive ?props.state.session : props.state.break)*60) * 100)}%`}}></div>
+        <div id="bar" style={{width:`${ProgressBar.current}%`}}></div>
       </div>
       <div className="play-stop-buttons">
       <button

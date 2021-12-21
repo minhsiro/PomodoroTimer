@@ -1,14 +1,14 @@
 export const initialState = {
   ClockInfo: {
     title: "Pomodoro",
-    session: 25,
+    session: 1,
     break: 5,
     goal: 4,
     countSession: 0,
     countBreak:0,
     isSessionActive: false,
     isBreakActive: false,
-    displayMinute: 25, // handle logic
+    displayMinute: 1, // handle logic
     displaySecond: 0, //handle logic
     counter: 0, // handle logic
     progressCount: 1 // handle progress bar
@@ -120,7 +120,6 @@ export const reducer = (state, action) => {
           newState.ClockInfo.progressCount = 1;
         }
       }
-
       return newState;
     }
     case "RESET": {

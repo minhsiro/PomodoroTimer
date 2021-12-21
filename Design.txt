@@ -66,24 +66,12 @@ desponsive design mobile                                                        
 => filter
 
 
-APP LOGIC:
-- when play/stop button is click, check if it is session time or break time by
-comparing session count and break count.
-- count function: set counter = session time in seconds
-after each iteration, decrease 1, and set displayMinute and displaySecond
-according to counter.
-- if counter reach 0, switch UI to break. the same goes for break.
-- if goal count === goal => reset everything.
-- only allow reset if clock is not running and only allow skip if it is break.
+App logic:
+- when play/stop button is clicked, useEffect runs and go inside setInterval.
+- after every second handleCount is called, state gets updated and triggers a re-render.
+- useEffect will not be triggered every render because it is only called once when play/button is clicked and will be called again if sessionActive or BreakActive change.
+- Meaning, setInterval in useEffect is still running after it was called the first time and will trigger a re-render after every second due to state changes but it will not block re-render due to it being ASYNCHRONOUS.
 
-progress bar logic
-set progress count = 1
-progress bar  = (1 / 25 * 60) * 100% (if session , 5 if break) => percentage
-
-the way logic go
-play stop is clicked
-useEffect runs, => call props.handleCount => set counter => set minute,set second
-=> render,
-after 1 sesond,
-=> call props.handleCount => set counter => set minute,set second => render
-if clicked again, => stop entering interval
+progress bar logic:
+- using useRef to get progressCount value every render, to fill progress bar
+- if it is session, max_width is session time. The same goes for break.
